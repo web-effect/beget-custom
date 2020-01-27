@@ -22,7 +22,7 @@ class CMSIterator{
                     echo "-------------------------------------------\n\n";
                     continue;
                 }
-                $this->classmap[]=$CMSClass;
+                $this->classmap[$path]=$CMSClass;
             }
         }
     }
@@ -47,9 +47,10 @@ class CMSIterator{
                 }
                 
                 $CMS=false;
-                foreach($this->classmap as $className){
+                foreach($this->classmap as $CMSkey=>$className){
                     $CMS=$className::getFromPath($path);
                     if($CMS){
+                        if(!$CMS->CMSkey)$CMS->CMSkey=$CMSkey;
                         echo "Сайт под управлением ".$CMS::CMS."\n";
                         break;
                     }

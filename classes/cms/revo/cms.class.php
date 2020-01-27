@@ -4,6 +4,7 @@ include_once(dirname(__DIR__).'/_base.class.php');
 
 class REVO_Controller extends BASE_Controller{
     const CMS='MODx Revolution';
+    public $CMSkey='revo';
     protected $path = '';
     private $core_file_path = '';
     private $config_file_path = false;

@@ -1,6 +1,7 @@
 <?php
 abstract class BASE_Controller{
     const CMS=null;
+    public $CMSkey = '';
     protected $path = '';
     protected $errors = array();
     

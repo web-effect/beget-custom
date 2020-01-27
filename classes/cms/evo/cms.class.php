@@ -4,6 +4,7 @@ include_once(dirname(__DIR__).'/_base.class.php');
 
 class EVO_Controller extends BASE_Controller{
     const CMS='MODx Evolution';
+    public $CMSkey='evo';
     protected $path = '';
     protected $errors = array();
     private $config_file_path = false;

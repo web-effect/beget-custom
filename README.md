@@ -31,7 +31,6 @@ private $root='';
 private $classmap=array();
 ```
 Список классов CMS для обхода  
-<br>
 ### Методы
 ```php
 public function __construct(string $root) : void
@@ -52,7 +51,6 @@ public function apply(callable $callback,$params=array()) : void
 
 **$callback** - функция, принимающая 2 параметра: $CMS - экзэмпляр класса контроллера CMS, $params - массив дополнительных параметров.  
 **$params** - массив дополнительных параметров.  
-<br>
 ### Пример
 ```php
 $callback=function(&$CMS,$params){
@@ -66,5 +64,5 @@ $callback=function(&$CMS,$params){
 };
 include_once(__DIR__.'/classes/cms.iterator.class.php');
 $iterator = new CMSIterator(dirname(__DIR__));
-$iterator->apply($callback);
+$iterator->apply($callback,array('key'=>'value'));
 ```

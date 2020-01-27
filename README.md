@@ -2,54 +2,53 @@
 
 1. Копируем папку в корень хостинга.
 2. Создаём в панели в пункте 'CronTab' задачу вида:
-    /usr/local/php-cgi/7.1/bin/php ~/.custom/db_pass_change.php
+/usr/local/php-cgi/7.1/bin/php ~/.custom/db_pass_change.php
 3. Запуск задачи настраиваем по потребностям например раз в месяц,
-    либо запускаем вручную по кнопке вида play справа от задачи
+либо запускаем вручную по кнопке вида play справа от задачи
 4. Пароли обновляются только у баз данных, поэтому для входа в phpmyadmin из панели нужно будет вводить пароль
 
 # Описание файлов и структуры:
- - Скрипты обработки располагаются в корне:
-   - batch_changes.php - массовое применение изменений
-   - db_pass_change.php - массовое изменение паролей к БД
-   - generator.php - генерация различных переменных (в частности для MODX - пароли, префиксы, sessionname, uuid)
- - Классы располагаются в папке classes
-   - classes/cms.iterator.class.php - класс для итерации и применения callback функции к CMS
-   - classes/cms/_base.class.php - основной класс контроллера CMS
-   - classes/cms/\<CMSkey\>/cms.class.php - класс конретной cms, обязательно расширяет оснвной класс classes/cms/_base.class.php
- - examples - примеры скриптов
- - updater - скрипты и данные для массового изменения CMS
- 
- # Описание классов:
- ## CMSIterator (classes/cms.iterator.class.php)
- ### Свойства
- ```php
- private $root='';
- ```
- Путь к директории в которой находятся директории сайтов для обхода
- 
- ```php
- private $classmap=array();
- ```
- Список классов CMS для обхода
- 
-  ### Методы
- ```php
- public function __construct(string $root) : void
- ```
-Конструктор класса.
+- Скрипты обработки располагаются в корне:
+    - batch_changes.php - массовое применение изменений
+    - db_pass_change.php - массовое изменение паролей к БД
+    - generator.php - генерация различных переменных (в частности для MODX - пароли, префиксы, sessionname, uuid)
+- Классы располагаются в папке classes
+    - classes/cms.iterator.class.php - класс для итерации и применения callback функции к CMS
+    - classes/cms/_base.class.php - основной класс контроллера CMS
+    - classes/cms/\<CMSkey\>/cms.class.php - класс конретной cms, обязательно расширяет оснвной класс classes/cms/_base.class.php
+- examples - примеры скриптов
+- updater - скрипты и данные для массового изменения CMS
 
-$root - Путь к директории в которой находятся директории сайтов для обхода.
-
+# Описание классов:
+## CMSIterator (classes/cms.iterator.class.php)
+### Свойства
 ```php
- public function loadClasses() : void
- ```
- Загружает классы CMS и заполняет $classmap для обхода.
- 
- ```php
- public function apply(callable $callback,$params=array()) : void
- ```
- Применяет функцию $callback к каждой обнаруженной CMS. Проходит по дирекориям в $root, проверяет наличие папки public_html, после чего ищет подходящий класс CMS вызывая статический метод getFromPath для каждого класса из $classmap, пока не будет возвращён экзэмпляр класса контролера CMS.
- 
- $callback - функция, принимающая 2 параметра: $CMS - экзэмпляр класса контроллера CMS, $params - массив дополнительных параметров.
- 
- $params - массив дополнительных параметров.
+private $root='';
+```
+Путь к директории в которой находятся директории сайтов для обхода  
+<br>
+```php
+private $classmap=array();
+```
+Список классов CMS для обхода
+<br>
+### Методы
+```php
+public function __construct(string $root) : void
+```
+Конструктор класса.  
+**$root** - Путь к директории в которой находятся директории сайтов для обхода.
+<br>
+```php
+public function loadClasses() : void
+```
+Загружает классы CMS и заполняет $classmap для обхода.
+<br>
+```php
+public function apply(callable $callback,$params=array()) : void
+```
+Применяет функцию $callback к каждой обнаруженной CMS. Проходит по дирекориям в $root, проверяет наличие папки public_html, после чего  ищет подходящий класс CMS вызывая статический метод getFromPath для каждого класса из $classmap, пока не будет возвращён экзэмпляр  класса контролера CMS.
+
+**$callback** - функция, принимающая 2 параметра: $CMS - экзэмпляр класса контроллера CMS, $params - массив дополнительных параметров.  
+**$params** - массив дополнительных параметров.
+<br>

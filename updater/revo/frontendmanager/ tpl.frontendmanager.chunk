@@ -1,0 +1,56 @@
+<$var $u_settings = $modx->user->getSettings()$>
+<$var $panelview = $u_settings['fm.panel.view']?:('fm.panel.view'|option)$>
+
+<$switch $panelview$>
+	<$case 'panel'$>
+		<div id="frontendManager" class="fm-panel" >
+			<a href="[[++manager_url]]" target="_blank" class="fm-logo"><img src="[[++manager_url]]templates/default/images/modx-icon-color.svg"></a>
+			<a href="[[++manager_url]]" target="_blank" class="fm-mode">
+				<span class="fm-icon-hide"><img src="[[++manager_url]]templates/default/images/modx-icon-color.svg"></span>
+			</a>
+			<$if $modx->hasPermission('edit_document')?$>
+				<a href="[[++manager_url]]?a=resource/update&id=<$$modx->resource->id$>" data-action="iframe">
+					<span class="fm-icon-edit"></span>
+					<span class="fm-link-text"><$'frontendmanager_btn_edit'|lexicon$></span>
+				</a>
+			<$/if$>
+			<$if $modx->hasPermission('edit_user')?$>
+				<a href="[[++manager_url]]?a=security/user" data-action="iframe">
+					<span class="fm-icon-user"></span>
+					<span class="fm-link-text"><$'frontendmanager_btn_users'|lexicon$></span>
+				</a>
+			<$/if$>
+			<$if $modx->hasPermission('edit_context')?$>
+				<a href="[[++manager_url]]?id=0&a=context/update&key=<$$modx->context->key$>" data-action="iframe">
+					<span class="fm-icon-context"></span>
+					<span class="fm-link-text"><$'frontendmanager_btn_context'|lexicon$></span>
+				</a>
+			<$/if$>
+			<$if $modx->hasPermission('settings')?$>
+				<a href="[[++manager_url]]?a=system/settings" data-action="iframe">
+					<span class="fm-icon-settings"></span>
+					<span class="fm-link-text"><$'frontendmanager_btn_settings'|lexicon$></span>
+				</a>
+			<$/if$>
+			<$if $modx->hasPermission('error_log_view')?$>
+				<a href="[[++manager_url]]?a=system/event" data-action="iframe">
+					<span class="fm-icon-log"></span>
+					<span class="fm-link-text"><$'frontendmanager_btn_log'|lexicon$></span>
+				</a>
+			<$/if$>
+			<$if $modx->hasPermission('empty_cache')?$>
+				<a href="[[++manager_url]]?a=system/refresh_site" data-action="iframe">
+					<span class="fm-icon-cache"></span>
+					<span class="fm-link-text"><$'frontendmanager_btn_cache'|lexicon$></span>
+				</a>
+			<$/if$>
+		</div>
+	<$case default, 'bookmark'$>
+		<div id="frontendManager" class="fm-bookmarks" >
+			<$if $modx->hasPermission('edit_document')?$>
+				<a target="_blank" href="backend/?a=resource/update&id=<$$modx->resource->id$>" id="quick_edit">Ред.</a>
+			<$/if$>
+		</div>
+<$/switch$>
+<script>frontendManager.config.panelview='<$$panelview$>'</script>
+

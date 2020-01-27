@@ -53,3 +53,18 @@ public function apply(callable $callback,$params=array()) : void
 **$callback** - функция, принимающая 2 параметра: $CMS - экзэмпляр класса контроллера CMS, $params - массив дополнительных параметров.  
 **$params** - массив дополнительных параметров.  
 <br>
+### Пример
+```php
+$callback=function(&$CMS,$params){
+    $config = $CMS->getConfig();
+    if(!$config){
+        echo $CMS->getErrors()."\n";
+        return;
+    }
+    var_dump($config);
+    var_dump($params);
+};
+include_once(__DIR__.'/classes/cms.iterator.class.php');
+$iterator = new CMSIterator(dirname(__DIR__));
+$iterator->apply($callback);
+```

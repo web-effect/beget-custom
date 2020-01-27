@@ -66,3 +66,4 @@ include_once(__DIR__.'/classes/cms.iterator.class.php');
 $iterator = new CMSIterator(dirname(__DIR__));
 $iterator->apply($callback,array('key'=>'value'));
 ```
+[Установка](#установка)

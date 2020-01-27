@@ -19,8 +19,12 @@
 - examples - примеры скриптов
 - updater - скрипты и данные для массового изменения CMS
 
+# Описание скриптов:
+[Установка](#установка)
+
 # Описание классов:
 ## CMSIterator (classes/cms.iterator.class.php)
+Класс для итерации и применения callback функции к CMS
 ### Свойства
 ```php
 private $root='';
@@ -33,7 +37,7 @@ private $classmap=array();
 Список классов CMS для обхода  
 ### Методы
 ```php
-public function __construct(string $root) : void
+public function __construct(string $root)
 ```
 Конструктор класса.
 
@@ -45,7 +49,7 @@ public function loadClasses() : void
 Загружает классы CMS и заполняет $classmap для обхода.  
 <br>
 ```php
-public function apply(callable $callback,$params=array()) : void
+public function apply(callable $callback,array $params=array()) : void
 ```
 Применяет функцию $callback к каждой обнаруженной CMS. Проходит по дирекориям в $root, проверяет наличие папки public_html, после чего  ищет подходящий класс CMS вызывая статический метод getFromPath для каждого класса из $classmap, пока не будет возвращён экзэмпляр  класса контролера CMS.
 
@@ -66,4 +70,61 @@ include_once(__DIR__.'/classes/cms.iterator.class.php');
 $iterator = new CMSIterator(dirname(__DIR__));
 $iterator->apply($callback,array('key'=>'value'));
 ```
-[Установка](#установка)
+
+## BASE_Controller (classes/cms/_base.class.php)
+Основной абстрактный класс контроллера CMS
+### Свойства
+```php
+const CMS=null;
+```
+Название CMS  
+<br>
+```php
+protected $path = '';
+```
+Директория CMS  
+<br>
+```php
+protected $errors = array();
+```
+Массив ошибок  
+
+### Методы
+```php
+public function __construct(string $path)
+```
+Конструктор класса.
+
+**$path** - Директория CMS  
+<br>
+```php
+static function getFromPath(string $path) : void
+```
+Определяет находится ли CMS по указанному пути и если находится то возвращает экзэмпляр класса CMS. Если CMS не найдена возвращает false
+
+**$path** - Директория CMS  
+<br>
+```php
+public function getPath() : string
+```
+Возвращает путь к директории CMS  
+<br>
+```php
+public function getConfig() : array
+```
+Пытается получить конфигурацию CMS. Возвращает false в случае неудачи. Иначе возвращает массив с ключами: 'db_type', 'db_user', 'db_host', 'db_pwd'  
+<br>
+```php
+public function setConfig(array $config) : boolean
+```
+Пытается записать конфигурацию CMS. Возвращает false в случае неудачи.  
+
+**$config** - Массив параметров для записи. Поддерживаются ключи: 'db_type', 'db_user', 'db_host', 'db_pwd'   
+<br>
+```php
+public function getErrors() : string
+```
+Возвращает список ошибок, разделённый переводом строки
+
+## \<CMS\>_Controller (classes/cms/\<CMS\>/cms.class.php)
+Класс конкретной CMS, расширяет BASE_Controller

@@ -9,9 +9,9 @@
 
 # Описание файлов и структуры:
 - Скрипты обработки располагаются в корне:
-    - batch_changes.php - массовое применение изменений
-    - db_pass_change.php - массовое изменение паролей к БД
-    - generator.php - генерация различных переменных (в частности для MODX - пароли, префиксы, sessionname, uuid)
+    - [batch_changes.php](#batch_changesphp---массовое-применение-изменений) - массовое применение изменений
+    - [db_pass_change.php](#db_pass_changephp---массовое-изменение-паролей-к-бд) - массовое изменение паролей к БД
+    - [generator.php](#generatorphp---генерация-различных-переменных) - генерация различных переменных (в частности для MODX - пароли, префиксы, sessionname, uuid)
 - Классы располагаются в папке classes
     - [classes/cms.iterator.class.php](#cmsiterator-classescmsiteratorclassphp) - класс для итерации и применения callback функции к CMS
     - [classes/cms/_base.class.php](#base_controller-classescms_baseclassphp) - основной класс контроллера CMS
@@ -20,7 +20,12 @@
 - updater - скрипты и данные для массового изменения CMS
 
 # Описание скриптов:
-[Установка](#установка)
+## batch_changes.php - массовое применение изменений
+
+## db_pass_change.php - массовое изменение паролей к БД
+
+## generator.php - генерация различных переменных
+
 
 # Описание классов:
 ## CMSIterator (classes/cms.iterator.class.php)

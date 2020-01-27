@@ -13,7 +13,7 @@
     - db_pass_change.php - массовое изменение паролей к БД
     - generator.php - генерация различных переменных (в частности для MODX - пароли, префиксы, sessionname, uuid)
 - Классы располагаются в папке classes
-    - classes/cms.iterator.class.php - класс для итерации и применения callback функции к CMS
+    - [classes/cms.iterator.class.php](#cmsiterator-classes-cms-iterator-class-php) - класс для итерации и применения callback функции к CMS
     - classes/cms/_base.class.php - основной класс контроллера CMS
     - classes/cms/\<CMSkey\>/cms.class.php - класс конретной cms, обязательно расширяет оснвной класс classes/cms/_base.class.php
 - examples - примеры скриптов
@@ -27,14 +27,9 @@
 Класс для итерации и применения callback функции к CMS
 ### Свойства
 ```php
-private $root='';
+private $root=''; //Путь к директории в которой находятся директории сайтов для обхода
+private $classmap=array(); //Список классов CMS для обхода
 ```
-Путь к директории в которой находятся директории сайтов для обхода  
-<br>
-```php
-private $classmap=array();
-```
-Список классов CMS для обхода  
 ### Методы
 ```php
 public function __construct(string $root)
@@ -75,20 +70,10 @@ $iterator->apply($callback,array('key'=>'value'));
 Основной абстрактный класс контроллера CMS
 ### Свойства
 ```php
-const CMS=null;
+const CMS=null; //Название CMS
+protected $path = '';//Директория CMS
+protected $errors = array();//Массив ошибок
 ```
-Название CMS  
-<br>
-```php
-protected $path = '';
-```
-Директория CMS  
-<br>
-```php
-protected $errors = array();
-```
-Массив ошибок  
-
 ### Методы
 ```php
 public function __construct(string $path)

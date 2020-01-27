@@ -13,9 +13,9 @@
     - db_pass_change.php - массовое изменение паролей к БД
     - generator.php - генерация различных переменных (в частности для MODX - пароли, префиксы, sessionname, uuid)
 - Классы располагаются в папке classes
-    - [classes/cms.iterator.class.php](#cmsiterator-classes-cms-iterator-class-php) - класс для итерации и применения callback функции к CMS
-    - classes/cms/_base.class.php - основной класс контроллера CMS
-    - classes/cms/\<CMSkey\>/cms.class.php - класс конретной cms, обязательно расширяет оснвной класс classes/cms/_base.class.php
+    - [classes/cms.iterator.class.php](#cmsiterator-classescmsiteratorclassphp) - класс для итерации и применения callback функции к CMS
+    - [classes/cms/_base.class.php](#base_controller-classescms_baseclassphp) - основной класс контроллера CMS
+    - [classes/cms/\<CMS\>/cms.class.php](#cms_controller-classescmscmscmsclassphp) - класс конретной cms, обязательно расширяет оснвной класс classes/cms/_base.class.php
 - examples - примеры скриптов
 - updater - скрипты и данные для массового изменения CMS
 
@@ -112,4 +112,4 @@ public function getErrors() : string
 Возвращает список ошибок, разделённый переводом строки
 
 ## \<CMS\>_Controller (classes/cms/\<CMS\>/cms.class.php)
-Класс конкретной CMS, расширяет BASE_Controller
+Класс конкретной CMS, расширяет BASE_Controller. Обязательно должен быть описан метод getFromPath

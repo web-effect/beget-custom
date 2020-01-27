@@ -21,3 +21,35 @@
  
  # Описание классов:
  ## CMSIterator (classes/cms.iterator.class.php)
+ ### Свойства
+ ```php
+ private $root='';
+ ```
+ Путь к директории в которой находятся директории сайтов для обхода
+ 
+ ```php
+ private $classmap=array();
+ ```
+ Список классов CMS для обхода
+ 
+  ### Методы
+ ```php
+ public function __construct(string $root) : void
+ ```
+Конструктор класса.
+
+$root - Путь к директории в которой находятся директории сайтов для обхода.
+
+```php
+ public function loadClasses() : void
+ ```
+ Загружает классы CMS и заполняет $classmap для обхода.
+ 
+ ```php
+ public function apply(callable $callback,$params=array()) : void
+ ```
+ Применяет функцию $callback к каждой обнаруженной CMS. Проходит по дирекориям в $root, проверяет наличие папки public_html, после чего ищет подходящий класс CMS вызывая статический метод getFromPath для каждого класса из $classmap, пока не будет возвращён экзэмпляр класса контролера CMS.
+ 
+ $callback - функция, принимающая 2 параметра: $CMS - экзэмпляр класса контроллера CMS, $params - массив дополнительных параметров.
+ 
+ $params - массив дополнительных параметров.

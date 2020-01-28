@@ -4,6 +4,7 @@ include_once(dirname(__DIR__).'/_base.class.php');
 
 class EVO_Controller extends BASE_Controller{
     const CMS='MODx Evolution';
+    const PHP_VERSION='5.6';
     public $CMSkey='evo';
     protected $path = '';
     protected $errors = array();
@@ -11,6 +12,7 @@ class EVO_Controller extends BASE_Controller{
     
     public function __construct($path){
         parent::__construct($path);
+        
     }
     
     static function getFromPath($path){

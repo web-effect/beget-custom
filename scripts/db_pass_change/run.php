@@ -15,13 +15,14 @@ ini_set('docref_ext', 0);
 ini_set('error_reporting', -1);
 ini_set('log_errors_max_len', 0);
 
-function generatePass(){
+function generatePass($params){
+    $params['pass_length']=$params['pass_length']?:8;
+    $params['pass_chars']=$params['pass_chars']?:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
     $pass='';
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
     $i=0;
-    $lenchars = strlen($chars);
-    while($i<8){
-        $pass.=$chars[random_int(0,$lenchars-1)];
+    $lenchars = strlen($params['pass_chars']);
+    while($i<$params['pass_length']){
+        $pass.=$params['pass_chars'][random_int(0,$lenchars-1)];
         $i++;
     }
     return $pass;
@@ -73,15 +74,15 @@ function changeDBPass($config,$oldpass,$newpass){
     return $result;
 }
 
-$CMSChangePass=function(&$CMS){
+$CMSChangePass=function(&$CMS,$params){
     $config = $CMS->getConfig();
-    var_dump($config);
+    //var_dump($config);
     if(!$config){
         echo $CMS->getErrors()."\n";
         return;
     }
     
-    $newPass = generatePass();
+    $newPass = generatePass($params);
     $oldPass = $config['db_pwd'];
 
     $pass_changed = changeDBPass($config,$oldPass,$newPass);
@@ -100,6 +101,7 @@ $CMSChangePass=function(&$CMS){
     }
 };
 
-include_once(__DIR__.'/classes/cms.iterator.class.php');
-$iterator = new CMSIterator(dirname(__DIR__));
-$iterator->apply($CMSChangePass);
+include_once(__DIR__.'/config.inc.php');
+include_once(dirname(dirname(__DIR__)).'/classes/cms.iterator.class.php');
+$iterator = new CMSIterator(dirname(dirname(dirname(__DIR__))));
+$iterator->apply($CMSChangePass,$config);

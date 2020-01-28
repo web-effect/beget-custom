@@ -1,7 +1,7 @@
 <?php
 
 $included = get_included_files();
-if(strpos(__DIR__,dirname($included[0]))!==0)die();
+if(strpos(dirname($included[0]),dirname(__DIR__))!==0)die();
 
 class CMSIterator{
     private $root='';

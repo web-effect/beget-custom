@@ -98,6 +98,7 @@ $iterator->apply($callback,array('key'=>'value'));
 ```php
 const CMS=null; //Название CMS
 public $CMSkey='' //Ключь CMS, если не задан, будет устанавлен итератором на основании директории класса
+const PHP_VERSION=''; //Версия php. необходимая для работы CMS
 protected $path = '';//Директория CMS
 protected $errors = array();//Массив ошибок
 ```

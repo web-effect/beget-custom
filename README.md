@@ -17,7 +17,6 @@
     - [classes/cms/_base.class.php](#base_controller-classescms_baseclassphp) - основной класс контроллера CMS
     - [classes/cms/\<CMS\>/cms.class.php](#cms_controller-classescmscmscmsclassphp) - класс конретной cms, обязательно расширяет оснвной класс classes/cms/_base.class.php
 - examples - примеры скриптов
-- updater - скрипты и данные для массового изменения CMS
 
 # Описание скриптов:
 ## batch_changes - массовое применение изменений
@@ -42,11 +41,13 @@ config.inc.php используется для хранения настроек
 **generate** принимает 2 параметра:  
 **$chars_set** - массив символов для генерации или список алиасов наборов через запятую. Доступные наборы определяются в config.inc.php
 **$length** - длинна строки для генерации
+
 Примеры:
  - ```generate('al,num,spec',8)``` создаст строку в 8 символов из алфавита, цифр и спецсимволов
  - ```generate('lower,num',14)``` создаст строку в 14 символов из строчных букв и цифр
  
 config.inc.php используется для хранения наборов и шаблонов для генерации. Чтобы вставить генерацию строки в текст используется конструкция [[**$chars_set**|**$length**]]
+
 Примеры:
 $database_password = [[al,num,spec|8]]
 $site_id = modx[[lower,num|14]].[[num|8]]

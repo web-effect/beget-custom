@@ -5,11 +5,17 @@ if(count($included)>1)die();
 $gitpath='~/.custom';
 
 //Запрашиваем изменения
-$changes=shell_exec('cd '.$gitpath.';git fetch');
-if(empty($changes)){
+shell_exec('cd '.$gitpath.';git fetch 2>&1');
+sleep(10);
+
+//Запрашиваем статус
+$status=shell_exec('cd '.$gitpath.';git status');
+$changed=preg_match('#Your branch is behind#ui',$status);
+if(!$changed){
     echo 'Изменений не найдено';
     die();
 }
+
 //Обновляем репозиторий
 shell_exec('cd '.$gitpath.';git pull');
 

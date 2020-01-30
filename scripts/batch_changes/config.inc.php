@@ -1,8 +1,7 @@
 <?php
 
 $config=array();
-$accaunt_config=dirname(dirname(__DIR__)).'/config.inc.php';
-var_dump($accaunt_config);
+$accaunt_config=__DIR__.'/config.acc.inc.php';
 if(file_exists($accaunt_config))include_once($accaunt_config);
 
 $config=array_merge_recursive(array(

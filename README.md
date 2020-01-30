@@ -2,12 +2,11 @@
 
 1. Выполнить в консоли ```git clone https://github.com/web-effect/beget-custom/ .custom```
 2. Создаём в панели в пункте 'CronTab' задачу вида:
-/usr/local/php-cgi/7.1/bin/php ~/.custom/git.autopull.php
+```/usr/local/php-cgi/7.1/bin/php ~/.custom/git.autopull.php```
 Время срабатывания каждые 10 минут
 3. Создаём в панели в пункте 'CronTab' задачу вида:
-/usr/local/php-cgi/7.1/bin/php ~/.custom/scripts/\<script_dir\>/run.php
-4. Запуск задачи настраиваем по потребностям например раз в месяц,
-либо запускаем вручную по кнопке вида play справа от задачи
+```/usr/local/php-cgi/7.1/bin/php ~/.custom/scripts/\<script_dir\>/run.php```
+4. Запуск задачи настраиваем по потребностям например раз в месяц, либо запускаем вручную по кнопке вида play справа от задачи
 5. Пароли обновляются только у баз данных, поэтому для входа в phpmyadmin из панели нужно будет вводить пароль
 
 # Описание файлов и структуры:

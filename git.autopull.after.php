@@ -10,4 +10,4 @@ $r=shell_exec('/usr/local/php-cgi/7.1/bin/php ~/.custom/scripts/batch_changes/ru
 
 echo $r;
 
-//+
+//++

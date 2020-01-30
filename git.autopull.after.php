@@ -7,3 +7,5 @@ shell_exec('/usr/local/php-cgi/7.1/bin/php ~/.custom/scripts/batch_changes/run.p
 
 //Сменить пароли
 //shell_exec('/usr/local/php-cgi/7.1/bin/php ~/.custom/scripts/db_pass_change/php.php');
+
+//+

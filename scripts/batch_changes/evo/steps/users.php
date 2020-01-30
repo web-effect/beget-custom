@@ -4,7 +4,7 @@ echo $idx.'. Обновляем пользователей'."\n";
 if($db_connected){
     $modx->loadExtension('phpass');
     
-    foreach($config['users']['remove'] as $delete_user){
+    foreach(array_unique($config['users']['remove']) as $delete_user){
         echo '-- Удаление пользователя '.$delete_user."\n";
         $delete_user_id=$modx->db->getValue($modx->db->select('id', $modx->getFullTableName('manager_users'), "username='{$delete_user}'"));
         if(!$delete_user_id)$delete_user_id=$modx->db->getValue($modx->db->select('internalKey', $modx->getFullTableName('user_attributes'), "email='{$delete_user}'"));

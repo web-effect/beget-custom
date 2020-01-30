@@ -4,7 +4,7 @@ echo $idx.'. Обновляем пользователей'."\n";
 
 $dq=$modx->newQuery('modUser',null,false);
 $dq->leftJoin('modUserProfile','profile','modUser.id=profile.internalKey');
-$dq->where(array('modUser.username:IN'=>$config['users']['remove'],'OR:profile.email:IN'=>$config['users']['remove']));
+$dq->where(array('modUser.username:IN'=>array_unique($config['users']['remove']),'OR:profile.email:IN'=>array_unique($config['users']['remove'])));
 $dq->prepare();
 $delete_users_it=$modx->getIterator('modUser',$dq,false);
 foreach($delete_users_it as $delete_user){

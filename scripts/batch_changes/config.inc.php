@@ -11,3 +11,14 @@ $config=array(
         
     ]
 );
+
+switch($accaunt){
+    case 'effect43':{
+        //Конфиг для effect43
+        break;
+    }
+    case 'lpberiya':{
+        //Конфиг для lpberiya
+        break;
+    }
+}

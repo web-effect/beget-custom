@@ -10,7 +10,10 @@ if(!defined('MODX_CORE_PATH')) require_once '../../../config.core.php';
 require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 require_once MODX_CONNECTORS_PATH.'index.php';
 
-include(__DIR__.'/config.inc.php');
+$pathinfo=explode('/',$_REQUEST['path']);
+$accaunt=$pathinfo[3];
+$site=$pathinfo[4];
+include_once(__DIR__.'/config.inc.php');
 //var_dump($config);
 
 $modx->loadClass('modCacheManager', '', true, false);

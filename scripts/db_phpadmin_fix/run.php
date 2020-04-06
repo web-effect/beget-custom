@@ -67,6 +67,6 @@ $CMSUpdatePhpMyAdmin = function(&$CMS,$params){
     sleep(3);
 };
 
-include_once(__DIR__.'/cms.iterator.class.php');
-$iterator = new CMSIterator(dirname(__DIR__));
+include_once(dirname(dirname(__DIR__)).'/classes/cms.iterator.class.php');
+$iterator = new CMSIterator(dirname(dirname(dirname(__DIR__))));
 $iterator->apply($CMSUpdatePhpMyAdmin,$params);

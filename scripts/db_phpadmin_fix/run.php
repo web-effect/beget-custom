@@ -1,17 +1,23 @@
 <?php
 //Обновление паролей в phpmyadmin
 //Для запуска в команду необходимо передать логин и пароль аккаунта
-
-//Даныый скрипт можно использовать как пример работы с api bget
-
 $included = get_included_files();
 if(count($included)>1)die();
 
+ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
+ini_set('html_errors', 1);
+ini_set('log_errors', 1);
+ini_set('ignore_repeated_errors', 0);
+ini_set('ignore_repeated_source', 0);
+ini_set('report_memleaks', 1);
+ini_set('track_errors', 1);
+ini_set('docref_root', 0);
+ini_set('docref_ext', 0);
 ini_set('error_reporting', -1);
+ini_set('log_errors_max_len', 0);
 
-$params=array('login'=>'','pwd'=>'');
-
+$params=array('login'=>$argv[1],'pwd'=>$argv[2]);
 if(empty($params['login'])||empty($params['pwd']))die('Для работы необxодимо указать логин и пароль аккаунта');
 
 function sendAppRequest($app,$params=array()){

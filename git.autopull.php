@@ -4,6 +4,11 @@ if(count($included)>1)die();
 
 $gitpath='~/.custom';
 
+//Откатываем текущие изменения
+shell_exec('cd '.$gitpath.';git reset --hard HEAD');
+shell_exec('cd '.$gitpath.';git clean -ndx');
+shell_exec('cd '.$gitpath.';git clean -fdx');
+
 //Запрашиваем изменения
 shell_exec('cd '.$gitpath.';git fetch 2>&1');
 sleep(10);

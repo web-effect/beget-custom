@@ -35,3 +35,22 @@ if($cache->copyTree($confrom,$conto)){
 }else{
     echo '---- НЕ скопировано'."\n";
 }
+
+echo '-- Вносим изменения в файлы'."\n";
+echo '---- core/model/modx/processors/security/user/update.class.php'."\n";
+$content=file_get_contents(MODX_CORE_PATH.'model/modx/processors/security/user/update.class.php');
+$content=str_replace(
+    "'password' => \$this->newPassword,\n",
+    "'password' => \$this->newPassword,'username' => \$this->object->get('username'),'login_url' => \$this->modx->getOption('site_url').substr(\$this->modx->getOption('manager_url'),1),\n",
+    $content
+);
+file_put_contents(MODX_CORE_PATH.'model/modx/processors/security/user/update.class.php',$content);
+
+echo '---- core/model/modx/processors/security/user/create.class.php'."\n";
+$content=file_get_contents(MODX_CORE_PATH.'model/modx/processors/security/user/create.class.php');
+$content=str_replace(
+    "'password' => \$this->newPassword,\n",
+    "'password' => \$this->newPassword,'username' => \$this->object->get('username'),'login_url' => \$this->modx->getOption('site_url').substr(\$this->modx->getOption('manager_url'),1),\n",
+    $content
+);
+file_put_contents(MODX_CORE_PATH.'model/modx/processors/security/user/create.class.php',$content);

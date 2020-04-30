@@ -3,14 +3,14 @@ include_once(dirname(__DIR__).'/config.inc.php');
 
 $config=array_merge_recursive(array(
     'steps'=>[
-        'linkTVsToMain',
+        /*'linkTVsToMain',
         'updateFiles',
         'modLexiconEntry',
         'modSystemSetting',
         'modMenu',
         'modDashboardWidget',
         'addCSS',
-        'updateExtra',
+        'updateExtra',*/
         'users',
     ],
     'linkToMainTVs'=>['image'],
@@ -50,4 +50,9 @@ $config=array_merge_recursive(array(
             ]
         ]
     ],
+    'users'=>[
+        'create'=>[
+            
+        ],
+    ]
 ),$config?:array());

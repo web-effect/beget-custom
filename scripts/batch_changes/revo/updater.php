@@ -1,4 +1,17 @@
 <?php
+/*ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+ini_set('html_errors', 1);
+ini_set('log_errors', 1);
+ini_set('ignore_repeated_errors', 0);
+ini_set('ignore_repeated_source', 0);
+ini_set('report_memleaks', 1);
+ini_set('track_errors', 1);
+ini_set('docref_root', 0);
+ini_set('docref_ext', 0);
+ini_set('error_reporting', -1);
+ini_set('log_errors_max_len', 0);*/
+
 $included = get_included_files();
 if(count($included)>1)die();
 
@@ -9,6 +22,11 @@ require $_REQUEST['path']."/public_html/config.core.php";
 if(!defined('MODX_CORE_PATH')) require_once '../../../config.core.php';
 require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
 require_once MODX_CONNECTORS_PATH.'index.php';
+
+if(!$modx->connect()){
+    echo 'Не удалось подключится к базе данных '."\n";
+    exit();
+}
 
 $pathinfo=explode('/',$_REQUEST['path']);
 $accaunt=$pathinfo[3];

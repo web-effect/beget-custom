@@ -20,7 +20,7 @@ $config=array_merge_recursive(array(
         ['namespace'=>'core','topic'=>'user','language'=>'ru','name'=>'user_updated_password_message','value'=>'Пользователь обновлён.<br>Вход:&nbsp;[[+login_url]]<br>Логин: [[+username]]<br>Пароль: [[+password]]'],
     ],
     'modSystemSetting'=>[
-        ['key'=>'support_url','namespace'=>'core','area'=>'manager','value'=>'//web-kirov.ru/abvgd']
+        //['key'=>'support_url','namespace'=>'core','area'=>'manager','value'=>'//web-kirov.ru/abvgd']
     ],
     'modMenu'=>[
         [

@@ -5,6 +5,7 @@ $accaunt_config=__DIR__.'/config.acc.inc.php';
 if(file_exists($accaunt_config))include_once($accaunt_config);
 
 $config=array_merge_recursive(array(
+    'exclude'=>['18-arm-lab.ru'],
     'users'=>[
         'update'=>[
             //'info@web-kirov.ru'=>array(),

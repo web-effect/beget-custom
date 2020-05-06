@@ -32,7 +32,11 @@ $pathinfo=explode('/',$_REQUEST['path']);
 $accaunt=$pathinfo[3];
 $site=$pathinfo[4];
 include_once(__DIR__.'/config.inc.php');
-//var_dump($config);
+//var_dump($site,$config);
+if(in_array($site,$config['exclude'])){
+    echo 'Сайт находится в исключениях, пропускаем'."\n";
+    exit();
+}
 
 $modx->loadClass('modCacheManager', '', true, false);
 $cache = new modCacheManager($modx);

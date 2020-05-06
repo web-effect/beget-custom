@@ -1,4 +1,17 @@
 <?php
+/*ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+ini_set('html_errors', 1);
+ini_set('log_errors', 1);
+ini_set('ignore_repeated_errors', 0);
+ini_set('ignore_repeated_source', 0);
+ini_set('report_memleaks', 1);
+ini_set('track_errors', 1);
+ini_set('docref_root', 0);
+ini_set('docref_ext', 0);
+ini_set('error_reporting', -1);
+ini_set('log_errors_max_len', 0);*/
+
 $included = get_included_files();
 if(count($included)>1)die();
 
@@ -21,6 +34,9 @@ try {
     echo 'НЕ удалось подключится к базе: ',  $e->getMessage(), "\n";
 }
 
+$pathinfo=explode('/',$_REQUEST['path']);
+$accaunt=$pathinfo[3];
+$site=$pathinfo[4];
 include(__DIR__.'/config.inc.php');
 //var_dump($config);
 

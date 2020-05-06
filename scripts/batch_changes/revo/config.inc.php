@@ -50,9 +50,4 @@ $config=array_merge_recursive(array(
             ]
         ]
     ],
-    'users'=>[
-        'create'=>[
-            
-        ],
-    ]
 ),$config?:array());

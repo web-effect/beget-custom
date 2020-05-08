@@ -11,7 +11,8 @@ $config=array_merge_recursive(array(
             //'info@web-kirov.ru'=>array(),
         ],
         'remove'=>[
-            'nk@web-kirov.ru','nk@web-kirov.ru','206866@mail.ru'
+            'nk@web-kirov.ru','nk@web-kirov.ru','206866@mail.ru',
+            'adeks220@mail.ru'
         ],
         
     ]

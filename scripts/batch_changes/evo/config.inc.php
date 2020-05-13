@@ -6,4 +6,13 @@ $config=array_merge_recursive(array(
         'updateFiles',
         'users',
     ],
+    'users'=>[
+        'create'=>[
+            /*'tonnedo@gmail.com'=>[
+                'profile'=>[
+                    'role'=>1
+                ],
+            ]*/
+        ]
+    ]
 ),$config?:array());

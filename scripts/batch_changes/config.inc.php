@@ -14,7 +14,14 @@ $config=array_merge_recursive(array(
             'nk@web-kirov.ru','nk@web-kirov.ru','206866@mail.ru',
             'adeks220@mail.ru'
         ],
-        
+        'create'=>[
+            /*'tonnedo@gmail.com'=>[
+                'password'=>'**********',
+                'profile'=>[
+                    'email'=>'tonnedo@gmail.com'
+                ]
+            ]*/
+        ]
     ]
 ),$config?:array());
 

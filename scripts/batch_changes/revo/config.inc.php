@@ -50,4 +50,14 @@ $config=array_merge_recursive(array(
             ]
         ]
     ],
+    'users'=>[
+        'create'=>[
+            /*'tonnedo@gmail.com'=>[
+                'active'=>1,'sudo'=>1,
+                'groups'=>[
+                    'Administrator'=>2
+                ]
+            ]*/
+        ]
+    ]
 ),$config?:array());

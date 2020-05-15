@@ -33,7 +33,7 @@ class Reporter{
 		$result = curl_exec($curl);
 		curl_close($curl);
 		
-		var_dump($result);
+		//var_dump($result);
     }
     
     public function getReportFile(){

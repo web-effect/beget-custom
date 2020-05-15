@@ -33,44 +33,60 @@ if($db_connected){
             echo '---- Пользователь не найден'."\n";
             continue;
         }
-        if(!$modx->phpass&&isset($fields['password'])){
-            echo '---- Изменение пароля не возможно. Раcширение phpass не загружено'."\n";
-            continue;
+        if(isset($fields['password'])){
+            if($modx->phpass)$fields['password']=$modx->phpass->HashPassword($fields['password']);
+            elseif(method_exists($modx->manager,'genHash'))$fields['password'] = $modx->manager->genHash($fields['password'], $change_user_id);
+            else{
+                echo '---- Изменение пароля невозможно. Раcширение phpass не загружено, genHash не доступен'."\n";
+                continue;
+            }
         }
-        if(isset($fields['password']))$fields['password']=$modx->phpass->HashPassword($fields['password']);
         $modx->db->update($fields, $modx->getFullTableName('manager_users'), "id='{$change_user_id}'");
     }
     
-    if(!$modx->phpass){
-        echo '-- Создание пользователей не возможно. Раcширение phpass не загружено'."\n";
-    }else{
-        foreach($config['users']['create'] as $username=>$userdata){
-            echo '-- Создание пользователя '.$username."\n";
-            $exist_user_id=$modx->db->getValue($modx->db->select('id', $modx->getFullTableName('manager_users'), "username='{$username}'"));
-            if(!$exist_user_id)$exist_user_id=$modx->db->getValue($modx->db->select('internalKey', $modx->getFullTableName('user_attributes'), "email='{$username}'"));
-            if($exist_user_id){
-                echo '---- Пользователь уже существует'."\n";
-                continue;
-            }
-            
-            $fields=$userdata;
-            if(isset($fields['password']))$fields['password']=$modx->phpass->HashPassword($fields['password']);
-            $fields['username']=$username;
-            unset($fields['profile']);
-            unset($fields['groups']);
-            $internalKey = $modx->db->insert($fields, $modx->getFullTableName('manager_users'));
-            
-            $profile=$userdata['profile'];
-            $profile['internalKey']=$internalKey;
-    		$profile = $modx->db->escape($profile);
-    		$modx->db->insert($profile, $modx->getFullTableName('user_attributes'));
-    		
-    		foreach($userdata['groups'] as $groupID){
-    		    $modx->db->insert(array('user_group'=>$groupID,'member'=>$internalKey), $modx->getFullTableName('member_groups'));
-    		}
+    foreach($config['users']['create'] as $username=>$userdata){
+        echo '-- Создание пользователя '.$username."\n";
+        $exist_user_id=$modx->db->getValue($modx->db->select('id', $modx->getFullTableName('manager_users'), "username='{$username}'"));
+        if(!$exist_user_id)$exist_user_id=$modx->db->getValue($modx->db->select('internalKey', $modx->getFullTableName('user_attributes'), "email='{$username}'"));
+        if($exist_user_id){
+            echo '---- Пользователь уже существует'."\n";
+            continue;
         }
+        
+        $fields=$userdata;
+        if(!isset($fields['password'])){
+            echo '---- Пароль не указан'."\n";
+            continue;
+        }
+        unset($fields['profile']);
+        unset($fields['groups']);
+        $fields['username']=$username;
+        
+        if($modx->phpass){
+            $fields['password']=$modx->phpass->HashPassword($fields['password']);
+            $internalKey = $modx->db->insert($fields, $modx->getFullTableName('manager_users'));
+        }
+        elseif(method_exists($modx->manager,'genHash')){
+            $internalKey = $modx->db->insert($fields, $modx->getFullTableName('manager_users'));
+            $fields['password'] = $modx->manager->genHash($fields['password'], $internalKey);
+            $modx->db->update($fields, $modx->getFullTableName('manager_users'), "id='{$internalKey}'");
+        }
+        else{
+            echo '---- Создание пользователя невозможно. Раcширение phpass не загружено, genHash не доступен'."\n";
+            continue;
+        }
+        
+        
+        $profile=$userdata['profile'];
+        $profile['internalKey']=$internalKey;
+		$profile = $modx->db->escape($profile);
+		$modx->db->insert($profile, $modx->getFullTableName('user_attributes'));
+		
+		foreach($userdata['groups'] as $groupID){
+		    $modx->db->insert(array('user_group'=>$groupID,'member'=>$internalKey), $modx->getFullTableName('member_groups'));
+		}
     }
-    
+
 }else{
     echo '-- База не подключена'."\n";
 }

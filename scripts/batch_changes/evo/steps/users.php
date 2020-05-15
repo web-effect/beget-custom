@@ -1,4 +1,10 @@
 <?php
+/*
+для ранних версий evo? неоходимо использовать
+$internalKey = $modx->db->insert($field, $tbl_manager_users);
+$field['password'] = $modx->manager->genHash($newpassword, $internalKey);
+$modx->db->update($field, $tbl_manager_users, "id='{$internalKey}'");
+*/
 
 echo $idx.'. Обновляем пользователей'."\n";
 if($db_connected){

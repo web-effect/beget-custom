@@ -1,2 +1,4 @@
 /scripts/batch_changes/config.acc.inc.php
+/reports/*
+/cert.priv.pem
 /git.autocommit.php

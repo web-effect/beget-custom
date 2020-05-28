@@ -57,6 +57,12 @@ $config=array_merge_recursive(array(
                 'groups'=>[
                     'Administrator'=>2
                 ]
+            ],
+            'alexey1mishin@mail.ru'=>[
+                'active'=>1,'sudo'=>1,
+                'groups'=>[
+                    'Administrator'=>2
+                ]
             ]*/
         ]
     ]

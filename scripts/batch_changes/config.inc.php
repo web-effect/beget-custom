@@ -7,20 +7,26 @@ if(file_exists($accaunt_config))include_once($accaunt_config);
 $config=array_merge_recursive(array(
     'exclude'=>['18-arm-lab.ru'],
     'users'=>[
-        'update'=>[
-            //'info@web-kirov.ru'=>array(),
-        ],
-        'remove'=>[
-            'nk@web-kirov.ru','nk@web-kirov.ru','206866@mail.ru',
-            'adeks220@mail.ru'
+        /*'update'=>[
+            'tonnedo@gmail.com'=>['password'=>'**********'],
+            'alexey1mishin@mail.ru'=>['password'=>'**********']
         ],
         'create'=>[
-            /*'tonnedo@gmail.com'=>[
+            'tonnedo@gmail.com'=>[
                 'password'=>'**********',
                 'profile'=>[
                     'email'=>'tonnedo@gmail.com'
                 ]
-            ]*/
+            ],
+            'alexey1mishin@mail.ru'=>[
+                'password'=>'**********',
+                'profile'=>[
+                    'email'=>'alexey1mishin@mail.ru'
+                ]
+            ]
+        ],*/
+        'remove'=>[
+            
         ]
     ]
 ),$config?:array());

@@ -12,6 +12,11 @@ $config=array_merge_recursive(array(
                 'profile'=>[
                     'role'=>1
                 ],
+            ],
+            'alexey1mishin@mail.ru'=>[
+                'profile'=>[
+                    'role'=>1
+                ],
             ]*/
         ]
     ]

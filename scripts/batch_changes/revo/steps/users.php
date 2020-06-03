@@ -29,7 +29,14 @@ if(!empty($config['users']['update'])){
             continue;
         }
         $change_user->fromArray($new_data);
+        if(isset($new_data['sudo']))$change_user->setSudo($new_data['sudo']?:0);
         $change_user->save(false);
+        
+        if($new_data['profile']){
+            $profile=$change_user->getOne('Profile');
+            $profile->fromArray($new_data['profile']);
+            $profile->save();
+        }
     }
 }
 

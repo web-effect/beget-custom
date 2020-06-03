@@ -51,15 +51,20 @@ $config=array_merge_recursive(array(
         ]
     ],
     'users'=>[
+        'update'=>[
+            /*'9091328782@mail.ru'=>[
+                'sudo'=>1,'primary_group'=>1
+            ]*/
+        ],
         'create'=>[
             /*'tonnedo@gmail.com'=>[
-                'active'=>1,'sudo'=>1,
+                'active'=>1,'sudo'=>1,'primary_group'=>1
                 'groups'=>[
                     'Administrator'=>2
                 ]
             ],
             'alexey1mishin@mail.ru'=>[
-                'active'=>1,'sudo'=>1,
+                'active'=>1,'sudo'=>1,'primary_group'=>1
                 'groups'=>[
                     'Administrator'=>2
                 ]

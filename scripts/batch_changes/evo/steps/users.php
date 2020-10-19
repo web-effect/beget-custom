@@ -25,7 +25,7 @@ if($db_connected){
         $modx->db->delete($modx->getFullTableName('user_attributes'), "internalKey='{$delete_user_id}'");
     }
     
-    foreach($config['users']['update'] as $change_user=>$fields){
+    foreach($config['users']['update'] as $change_user=>$userdata){
         echo '-- Изменение пользователя '.$change_user."\n";
         $change_user_id=$modx->db->getValue($modx->db->select('id', $modx->getFullTableName('manager_users'), "username='{$change_user}'"));
         if(!$change_user_id)$change_user_id=$modx->db->getValue($modx->db->select('internalKey', $modx->getFullTableName('user_attributes'), "email='{$change_user}'"));
@@ -33,6 +33,7 @@ if($db_connected){
             echo '---- Пользователь не найден'."\n";
             continue;
         }
+        $fields=$userdata;
         if(isset($fields['password'])){
             if($modx->phpass)$fields['password']=$modx->phpass->HashPassword($fields['password']);
             elseif(method_exists($modx->manager,'genHash'))$fields['password'] = $modx->manager->genHash($fields['password'], $change_user_id);
@@ -41,7 +42,16 @@ if($db_connected){
                 continue;
             }
         }
+        unset($fields['profile']);
+        unset($fields['groups']);
         $modx->db->update($fields, $modx->getFullTableName('manager_users'), "id='{$change_user_id}'");
+        
+        if($userdata['profile']){
+            $profile=$userdata['profile'];
+            $profile = $modx->db->escape($profile);
+            $modx->db->update($profile, $modx->getFullTableName('user_attributes'), "internalKey='{$change_user_id}'");
+        }
+		
     }
     
     foreach($config['users']['create'] as $username=>$userdata){

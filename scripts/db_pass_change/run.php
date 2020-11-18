@@ -24,22 +24,17 @@ function generatePass($params){
     ];
     
     $pass=[];
-    $length_left=$params['pass_length'];
-    $min_left=array_sum(array_column($params['pass_chars'],'min'));
-    foreach($params['pass_chars'] as &$part){
-        $min_left-=$part['min'];
-        $part['length']=random_int($part['min'],$length_left-$min_left);
-        $length_left-=$part['length'];
-        
+    foreach($params['pass_chars'] as $part){
         $i=0;
         $lenchars = strlen($part['chars']);
-        while($i<$part['length']){
+        while($i<$part['min']){
             $pass[]=$part['chars'][random_int(0,$lenchars-1)];
             $i++;
         }
     }
-    
-    if($length_left!=0){
+
+    $length_left=$params['pass_length']-count($pass);
+    if($length_left>0){
         $i=0;
         $chars=implode('',array_column($params['pass_chars'],'chars'));
         $lenchars = strlen($chars);

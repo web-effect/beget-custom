@@ -110,7 +110,6 @@ $CMSChangePass=function(&$CMS,$params){
     
     $newPass = generatePass($params);
     $oldPass = $config['db_pwd'];
-    echo $newPass;
 
     $pass_changed = changeDBPass($config,$oldPass,$newPass);
     

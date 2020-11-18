@@ -17,14 +17,40 @@ ini_set('log_errors_max_len', 0);
 
 function generatePass($params){
     $params['pass_length']=$params['pass_length']?:8;
-    $params['pass_chars']=$params['pass_chars']?:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
-    $pass='';
-    $i=0;
-    $lenchars = strlen($params['pass_chars']);
-    while($i<$params['pass_length']){
-        $pass.=$params['pass_chars'][random_int(0,$lenchars-1)];
-        $i++;
+    $params['pass_chars']=$params['pass_chars']?:[
+        ['min'=>1,'chars'=>'abcdefghijklmnopqrstuvwxyz'],
+        ['min'=>1,'chars'=>'ABCDEFGHIJKLMNOPQRSTUVWXYZ'],
+        ['min'=>2,'chars'=>'0123456789!@#$%^&*()_-=+;:,.?'],
+    ];
+    
+    $pass=[];
+    $length_left=$params['pass_length'];
+    $min_left=array_sum(array_column($params['pass_chars'],'min'));
+    foreach($params['pass_chars'] as &$part){
+        $min_left-=$part['min'];
+        $part['length']=random_int($part['min'],$length_left-$min_left);
+        $length_left-=$part['length'];
+        
+        $i=0;
+        $lenchars = strlen($part['chars']);
+        while($i<$part['length']){
+            $pass[]=$part['chars'][random_int(0,$lenchars-1)];
+            $i++;
+        }
     }
+    
+    if($length_left!=0){
+        $i=0;
+        $chars=implode('',array_column($params['pass_chars'],'chars'));
+        $lenchars = strlen($chars);
+        while($i<$length_left){
+            $pass[]=$chars[random_int(0,$lenchars-1)];
+            $i++;
+        }
+    }
+    
+    shuffle($pass);
+    $pass=implode('',$pass);
     return $pass;
 }
 
@@ -84,6 +110,7 @@ $CMSChangePass=function(&$CMS,$params){
     
     $newPass = generatePass($params);
     $oldPass = $config['db_pwd'];
+    echo $newPass;
 
     $pass_changed = changeDBPass($config,$oldPass,$newPass);
     
